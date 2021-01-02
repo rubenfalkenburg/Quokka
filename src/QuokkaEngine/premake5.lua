@@ -39,6 +39,8 @@ project "QuokkaEngine"
 
     filter "system:macosx"
 
+        defines "GL_SILENCE_DEPRECATION"
+        
         sysincludedirs
         {
             "src",
