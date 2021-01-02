@@ -1,0 +1,9 @@
+**/bin/
+**/obj/
+
+!**/vendor/premake/bin
+
+**.xcworkspace
+**.xcodeproj
+
+**.DS_Store
