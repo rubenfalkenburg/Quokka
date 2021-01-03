@@ -2,6 +2,8 @@
 
 #include "qkpch.h"
 
+#include "QuokkaEngine/Core/Window.h"
+
 int main();
 
 namespace QuokkaEngine
@@ -13,7 +15,7 @@ namespace QuokkaEngine
         virtual ~Application();
     private:
         bool m_isRunning = true;
-        GLFWwindow* m_window = nullptr;
+        std::unique_ptr<Window> m_window;
     private:
         void Initialize();
         void Run();
@@ -24,4 +26,4 @@ namespace QuokkaEngine
     
     // Defined in client
     Application* CreateApplication();
-} 
+}
