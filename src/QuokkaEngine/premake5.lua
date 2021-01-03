@@ -12,7 +12,7 @@ project "QuokkaEngine"
 
     defines
     {
-        -- "GLFW_INCLUDE_NONE",
+        "GLFW_INCLUDE_NONE",
         "_CRT_SECURE_NO_WARNINGS"
     }
 
@@ -26,12 +26,16 @@ project "QuokkaEngine"
     {
         "src",
         "%{IncludeDir.spdlog}",
-        "%{IncludeDir.glfw}"
+        "%{IncludeDir.glfw}",
+        "%{IncludeDir.glad}",
+        "%{IncludeDir.imgui}"
     }
 
     links
     {
-        "glfw"
+        "glfw",
+        "glad",
+        "imgui"
     }
 
     filter "system:windows"
@@ -45,7 +49,9 @@ project "QuokkaEngine"
         {
             "src",
             "%{IncludeDir.spdlog}",
-            "%{IncludeDir.glfw}"
+            "%{IncludeDir.glfw}",
+            "%{IncludeDir.glad}",
+            "%{IncludeDir.imgui}"
         }
 
         links

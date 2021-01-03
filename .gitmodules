@@ -4,3 +4,6 @@
 [submodule "src/QuokkaEngine/vendor/glfw"]
 	path = src/QuokkaEngine/vendor/glfw
 	url = https://github.com/rubenfalkenburg/glfw.git
+[submodule "src/QuokkaEngine/vendor/imgui"]
+	path = src/QuokkaEngine/vendor/imgui
+	url = https://github.com/rubenfalkenburg/imgui.git

@@ -7,6 +7,12 @@ project "QuokkaEditor"
     targetdir("%{wks.location}/bin/" .. outputdir .. "/%{prj.name}")
     objdir("%{wks.location}/obj/" .. outputdir .. "/%{prj.name}")
 
+    defines
+    {
+        "GLFW_INCLUDE_NONE",
+        "_CRT_SECURE_NO_WARNINGS"
+    }
+
     files
     {
         "src/**.h",
@@ -17,31 +23,34 @@ project "QuokkaEditor"
     {
         "%{wks.location}/QuokkaEngine/src",
         "%{wks.location}/QuokkaEngine/vendor",
-        "%{IncludeDir.glfw}"
     }
 
     links
     {
         "QuokkaEngine",
+        "imgui"
     }
 
     filter "system:windows"
         systemversion "latest"
 
     filter "system:macosx"
-
+        
         sysincludedirs
         {
             "%{wks.location}/QuokkaEngine/src",
             "%{wks.location}/QuokkaEngine/vendor",
-            "%{IncludeDir.glfw}"
+            "%{IncludeDir.spdlog}",
+            "%{IncludeDir.glfw}",
+            "%{IncludeDir.glad}",
+            "%{IncludeDir.imgui}"
         }
 
         links
         {
             "Cocoa.framework",
             "IOKit.framework",
-            "OpenGL.framework"
+            "OpenGL.framework",
         }
 
     filter "configurations:Debug"
