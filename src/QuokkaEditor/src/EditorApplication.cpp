@@ -5,7 +5,7 @@ namespace QuokkaEditor
     class EditorApplication : public QuokkaEngine::Application
     {
     public:
-        EditorApplication()
+        EditorApplication() : QuokkaEngine::Application("QuokkaEngine Editor")
         {
             
         }
@@ -15,6 +15,7 @@ namespace QuokkaEditor
             
         }
     };
+    
 }
 
 QuokkaEngine::Application* QuokkaEngine::CreateApplication()

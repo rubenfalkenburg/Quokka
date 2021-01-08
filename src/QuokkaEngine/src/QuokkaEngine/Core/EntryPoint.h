@@ -5,8 +5,8 @@
 int main()
 {
     auto application = QuokkaEngine::CreateApplication();
-
+    
     application->Run();
-
+    
     delete application;
 }

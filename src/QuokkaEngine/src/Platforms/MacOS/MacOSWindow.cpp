@@ -1,83 +1,99 @@
 #include "Platforms/MacOS/MacOSWindow.h"
 
-#include <imgui.h>
-#include <backends/imgui_impl_glfw.h>
-#include <backends/imgui_impl_opengl3.h>
+#include "QuokkaEngine/Core/Application.h"
 
-#define IMGUI_IMPL_OPENGL_LOADER_GLAD
-#include <backends/imgui_impl_opengl3.cpp>
-#include <backends/imgui_impl_glfw.cpp>
+#include <glad/glad.h>
 
 namespace QuokkaEngine {
-
+    
     MacOSWindow::MacOSWindow(const std::uint32_t width, const std::uint32_t height, const std::string title)
     {
-        Initialize(width, height, title);
+        if(!glfwInit())
+            Application::GetInstance().Close();
+
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
+        glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+        
+        m_windowHandle = glfwCreateWindow(width, height, title.c_str(), NULL, NULL);
+        
+        glfwMakeContextCurrent(m_windowHandle);
+        
+        // TODO move to opengl context
+        gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
+        
+        
+        glViewport(0.0f, 0.0f, width, height);
+        
+        glGenVertexArrays(1, &m_vertexArray);
+        glBindBuffer(GL_ARRAY_BUFFER, m_vertexBuffer);
+        
+        float vertices[3 * 3] = {
+            -0.5f, -0.5f, 0.0f,
+             0.5f, -0.5f, 0.0f,
+             0.0f,  0.5f, 0.0f,
+        };
+        
+        glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+        glEnableVertexAttribArray(0);
+        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), nullptr);
+        
+        glGenBuffers(1, &m_indexBuffer);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_indexBuffer);
+        
+        unsigned int indices[3] = {0, 1, 2};
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+
+        std::string vertexSrc = R"(
+            #version 410
+            
+            layout(location = 0) in vec3 a_Position;
+        
+            void main()
+            {
+                gl_Position = vec4(a_Position, 1.0);
+            }
+            
+        )";
+        
+        std::string fragmentSrc = R"(
+            #version 410
+            
+            layout(location = 0) out vec4 color;
+        
+            void main()
+            {
+                color = vec4(0.8, 0.2, 0.3, 1.0);
+            }
+            
+        )";
+        
+        
+        m_shader.reset(new Shader(vertexSrc, fragmentSrc));
     }
 
     MacOSWindow::~MacOSWindow()
     {
-        Dispose();
+        
     }
 
-    void MacOSWindow::OnUpdate()
+    void MacOSWindow::Update()
     {
-        glfwPollEvents();
-        glClearColor(0.45f, 0.55f, 0.60f, 1.00f);
+        glClearColor(0.1f, 0.1f, 0.1f, 1);
         glClear(GL_COLOR_BUFFER_BIT);
         
-        ImGui_ImplOpenGL3_NewFrame();
-        ImGui_ImplGlfw_NewFrame();
-        ImGui::NewFrame();
-
-        ImGui::Begin("Demo Window");
-        ImGui::Button("Hello!");
-        ImGui::End();
+        m_shader->Bind();
         
-        ImGui::Render();
-        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+        glBindVertexArray(m_vertexArray);
+        glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, nullptr);
         
-        int display_w, display_h;
-        glfwGetFramebufferSize(m_window, &display_w, &display_h);
-        glViewport(0, 0, display_w, display_h);
-        glfwSwapBuffers(m_window);
+        glfwSwapBuffers(m_windowHandle);
+        glfwPollEvents();
     }
 
-    void MacOSWindow::Initialize(const std::uint32_t width, const std::uint32_t height, const std::string title)
+    void MacOSWindow::Destroy()
     {
-        // Glfw
-        if(!glfwInit())
-            exit(EXIT_FAILURE);
-        
-        glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-        glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
-        glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
-        
-        m_window = glfwCreateWindow(width, height, title.c_str(), NULL, NULL);
-        
-        if(!m_window)
-        {
-            glfwTerminate();
-            exit(EXIT_FAILURE);
-        }
-        
-        glfwMakeContextCurrent(m_window);
-        gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
-
-        // ImGui
-        IMGUI_CHECKVERSION();
-        ImGui::CreateContext();
-        ImGui_ImplGlfw_InitForOpenGL(m_window, true);
-        ImGui_ImplOpenGL3_Init("#version 150");
-        ImGui::StyleColorsDark();
+        glfwDestroyWindow(m_windowHandle);
     }
 
-    void MacOSWindow::Dispose()
-    {
-        ImGui_ImplOpenGL3_Shutdown();
-        ImGui_ImplGlfw_Shutdown();
-        ImGui::DestroyContext();
-        
-        glfwDestroyWindow(m_window);
-    }
 }

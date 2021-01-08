@@ -1,6 +1,11 @@
 #pragma once
 
-#include "QuokkaEngine/Core/Window.h"
+#include "qkpch.h"
+
+#include "QuokkaEngine/Graphics/Window.h"
+#include "QuokkaEngine/Graphics/Shader.h"
+
+#include <GLFW/glfw3.h>
 
 namespace QuokkaEngine {
     
@@ -10,11 +15,13 @@ namespace QuokkaEngine {
         MacOSWindow(const std::uint32_t width, const std::uint32_t height, const std::string title);
         ~MacOSWindow();
         
-        void OnUpdate() override;
+        void Update() override;
+        void Destroy() override;
     private:
-        void Initialize(const std::uint32_t width, const std::uint32_t height, const std::string title);
-        void Dispose();
-    private:
-        GLFWwindow* m_window;
+        GLFWwindow* m_windowHandle;
+        
+        unsigned int m_vertexArray, m_vertexBuffer, m_indexBuffer;
+        std::unique_ptr<Shader> m_shader;
     };
+
 }

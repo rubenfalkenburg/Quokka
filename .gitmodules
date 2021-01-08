@@ -7,3 +7,6 @@
 [submodule "src/QuokkaEngine/vendor/imgui"]
 	path = src/QuokkaEngine/vendor/imgui
 	url = https://github.com/rubenfalkenburg/imgui.git
+[submodule "src/QuokkaEngine/vendor/glm"]
+	path = src/QuokkaEngine/vendor/glm
+	url = https://github.com/g-truc/glm.git

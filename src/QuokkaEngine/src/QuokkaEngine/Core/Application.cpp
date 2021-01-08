@@ -1,33 +1,54 @@
 #include "QuokkaEngine/Core/Application.h"
 
-namespace QuokkaEngine {
+#include "QuokkaEngine/Scene/GameObject.h"
 
-    Application::Application()
+namespace QuokkaEngine
+{
+    Application* Application::s_instance = nullptr;
+
+    Application::Application(std::string applicationName)
     {
-        Initialize();
+        s_instance = this;
+        
+        m_graphicsContext = GraphicsContext::Create();
+        m_window = Window::Create(1920, 1080, applicationName);
     }
 
     Application::~Application()
     {
-        Dispose();
+        
+    }
+
+    Application& Application::GetInstance()
+    {
+        return *s_instance;
     }
 
     void Application::Run()
     {
+        StartUp();
+        
         while (m_isRunning)
         {
-            m_window->OnUpdate();
+            m_graphicsContext->Update();
+            m_window->Update();
         }
+        
+        ShutDown();
     }
 
-    void Application::Initialize()
-    {
-        m_window = Window::Create(480, 640, "Quokka Engine");
-    }
-
-    void Application::Dispose()
+    void Application::StartUp()
     {
         
     }
-        
+
+    void Application::ShutDown()
+    {
+        delete s_instance;
+    }
+    
+    void Application::Close()
+    {
+        m_isRunning = false;
+    }
 }

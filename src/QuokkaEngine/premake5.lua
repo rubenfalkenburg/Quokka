@@ -28,7 +28,9 @@ project "QuokkaEngine"
         "%{IncludeDir.spdlog}",
         "%{IncludeDir.glfw}",
         "%{IncludeDir.glad}",
-        "%{IncludeDir.imgui}"
+        "%{IncludeDir.imgui}",
+        "%{IncludeDir.entt}",
+        "%{IncludeDir.glm}"
     }
 
     links
@@ -51,7 +53,9 @@ project "QuokkaEngine"
             "%{IncludeDir.spdlog}",
             "%{IncludeDir.glfw}",
             "%{IncludeDir.glad}",
-            "%{IncludeDir.imgui}"
+            "%{IncludeDir.imgui}",
+            "%{IncludeDir.entt}",
+            "%{IncludeDir.glm}"
         }
 
         links

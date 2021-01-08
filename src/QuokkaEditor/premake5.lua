@@ -27,8 +27,7 @@ project "QuokkaEditor"
 
     links
     {
-        "QuokkaEngine",
-        "imgui"
+        "QuokkaEngine"
     }
 
     filter "system:windows"
@@ -43,7 +42,8 @@ project "QuokkaEditor"
             "%{IncludeDir.spdlog}",
             "%{IncludeDir.glfw}",
             "%{IncludeDir.glad}",
-            "%{IncludeDir.imgui}"
+            "%{IncludeDir.imgui}",
+            "%{IncludeDir.glm}"
         }
 
         links
