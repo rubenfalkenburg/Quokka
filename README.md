@@ -46,7 +46,20 @@ git clone https://github.com/rubenfalkenburg/Quokka.git
     ```
     ./vendor/Premake/bin/premake5 xcode4
     ```
-<!-- ## Usage -->
+## Usage
+
+### Architecture
+In the following sections we talk about the architecture of the game engine using UML-diagrams.
+
+#### **Core**
+In the diagram below, describes the classes and their relationships. The EditorApplication is definied in a seperate project (QuokkaEditor), but for the current state of the diagram we defined it in the core diagram.
+<br>
+![](img/architecture-01.png)
+
+#### **Components**
+The components are the data-driven components which entt uses. Since all data will be public, we use structs instead of classes.
+<br>
+![](img/architecture-02.png)
 
 
 <!-- ## License -->
