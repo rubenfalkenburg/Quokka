@@ -1,12 +1,18 @@
 [submodule "src/QuokkaEngine/vendor/spdlog"]
 	path = src/QuokkaEngine/vendor/spdlog
 	url = https://github.com/gabime/spdlog.git
+[submodule "src/QuokkaEngine/vendor/imgui"]
+	path = src/QuokkaEngine/vendor/imgui
+	url = https://github.com/rubenfalkenburg/imgui
 [submodule "src/QuokkaEngine/vendor/glfw"]
 	path = src/QuokkaEngine/vendor/glfw
 	url = https://github.com/rubenfalkenburg/glfw.git
-[submodule "src/QuokkaEngine/vendor/imgui"]
-	path = src/QuokkaEngine/vendor/imgui
-	url = https://github.com/rubenfalkenburg/imgui.git
+[submodule "src/QuokkaEngine/vendor/entt"]
+	path = src/QuokkaEngine/vendor/entt
+	url = https://github.com/skypjack/entt.git
 [submodule "src/QuokkaEngine/vendor/glm"]
 	path = src/QuokkaEngine/vendor/glm
-	url = https://github.com/g-truc/glm.git
+	url = https://github.com/g-truc/glm
+[submodule "src/QuokkaEngine/vendor/stb"]
+	path = src/QuokkaEngine/vendor/stb
+	url = https://github.com/nothings/stb
