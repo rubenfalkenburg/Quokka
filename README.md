@@ -49,9 +49,9 @@ git clone https://github.com/rubenfalkenburg/Quokka.git
 ## Usage
 
 ### Architecture
-In the following sections we talk about the architecture of the game engine using UML-diagrams.
+The UML architecture of the game engine can be found in /docs or via [https://rubenfalkenburg.github.io/Quokka/.](https://rubenfalkenburg.github.io/Quokka/.)
 
-#### **Core**
+<!-- #### **Core**
 In the diagram below, describes the classes and their relationships. The EditorApplication is definied in a seperate project (QuokkaEditor), but for the current state of the diagram we defined it in the core diagram.
 <br>
 ![](img/architecture-01.png)
@@ -59,7 +59,7 @@ In the diagram below, describes the classes and their relationships. The EditorA
 #### **Components**
 The components are the data-driven components which entt uses. Since all data will be public, we use structs instead of classes.
 <br>
-![](img/architecture-02.png)
+![](img/architecture-02.png) -->
 
 
 <!-- ## License -->
