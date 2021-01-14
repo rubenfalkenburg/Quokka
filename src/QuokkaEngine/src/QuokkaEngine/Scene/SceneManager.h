@@ -9,10 +9,10 @@ namespace QuokkaEngine {
     class SceneManager
     {
     public:
-        static Scene& GetActiveScene();
-        static void SetActiveScene(Scene* scene);
-        static void LoadScene(const std::string sceneName);
+        static Scene& GetActiveScene() { return *s_activeScene.get(); };
+        static void SetActiveScene(Scene* scene) { s_activeScene.reset(scene); };
     private:
-        static Scene* s_activeScene;
+        static std::unique_ptr<Scene> s_activeScene;
     };
+
 }

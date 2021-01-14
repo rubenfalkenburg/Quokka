@@ -1,9 +1,11 @@
 #pragma once
 
+#define GL_SILENCE_DEPRECATION
+
 #include "qkpch.h"
 
 #include "QuokkaEngine/Graphics/Window.h"
-#include "QuokkaEngine/Graphics/Shader.h"
+#include "QuokkaEngine/Graphics/GraphicsContext.h"
 
 #include <GLFW/glfw3.h>
 
@@ -16,12 +18,10 @@ namespace QuokkaEngine {
         ~MacOSWindow();
         
         void Update() override;
-        void Destroy() override;
+        void Dispose() override;
     private:
         GLFWwindow* m_windowHandle;
-        
-        unsigned int m_vertexArray, m_vertexBuffer, m_indexBuffer;
-        std::unique_ptr<Shader> m_shader;
+        std::unique_ptr<GraphicsContext> m_graphicsContext;
     };
 
 }

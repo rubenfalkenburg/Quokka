@@ -4,8 +4,8 @@
 
 namespace QuokkaEngine {
     
-    std::unique_ptr<GraphicsContext> GraphicsContext::Create()
+    std::unique_ptr<GraphicsContext> GraphicsContext::Create(void *nativeWindow)
     {
-        return std::make_unique<OpenGLGraphicsContext>();
+        return std::make_unique<OpenGLGraphicsContext>(nativeWindow);
     }
 }

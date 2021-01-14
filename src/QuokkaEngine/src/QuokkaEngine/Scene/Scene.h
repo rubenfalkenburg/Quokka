@@ -1,16 +1,18 @@
 #pragma once
 
-#include "qkpch.h"
+#include "QuokkaEngine/Core/Application.h"
 
 namespace QuokkaEngine {
     
     class Scene
     {
     public:
-        Scene(std::string name);
-        ~Scene() = default;
+        Scene();
+        ~Scene();
     private:
-        std::string m_name;
+        void Update();
+    private:
+        friend class Application;
     };
 
 }

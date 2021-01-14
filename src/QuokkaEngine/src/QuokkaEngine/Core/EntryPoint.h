@@ -9,4 +9,4 @@ int main()
     application->Run();
     
     delete application;
-}
+};

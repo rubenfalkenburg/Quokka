@@ -12,8 +12,9 @@ namespace QuokkaEngine {
         virtual ~Window() = default;
         
         virtual void Update() = 0;
-        virtual void Destroy() = 0;
-        
+        virtual void Dispose() = 0;
+    public:
         static std::unique_ptr<Window> Create(const std::uint32_t width, const std::uint32_t height, const std::string title);
     };
+
 }

@@ -10,12 +10,6 @@ project "QuokkaEngine"
     pchheader "src/qkpch.h"
     pchsource "src/qkpch.cpp"
 
-    defines
-    {
-        "GLFW_INCLUDE_NONE",
-        "_CRT_SECURE_NO_WARNINGS"
-    }
-
     files
     {
         "src/**.h",
@@ -25,12 +19,13 @@ project "QuokkaEngine"
     includedirs
     {
         "src",
-        "%{IncludeDir.spdlog}",
-        "%{IncludeDir.glfw}",
-        "%{IncludeDir.glad}",
-        "%{IncludeDir.imgui}",
         "%{IncludeDir.entt}",
-        "%{IncludeDir.glm}"
+        "%{IncludeDir.glad}",
+        "%{IncludeDir.glfw}",
+        "%{IncludeDir.glm}",
+        "%{IncludeDir.imgui}",
+        "%{IncludeDir.spdlog}",
+        "%{IncludeDir.stb}"
     }
 
     links
@@ -45,32 +40,22 @@ project "QuokkaEngine"
 
     filter "system:macosx"
 
-        defines "GL_SILENCE_DEPRECATION"
-        
         sysincludedirs
         {
-            "src",
-            "%{IncludeDir.spdlog}",
-            "%{IncludeDir.glfw}",
-            "%{IncludeDir.glad}",
-            "%{IncludeDir.imgui}",
+            "%{wks.location}/QuokkaEngine/src",
             "%{IncludeDir.entt}",
-            "%{IncludeDir.glm}"
-        }
-
-        links
-        {
-            "Cocoa.framework",
-            "IOKit.framework",
-            "OpenGL.framework"
+            "%{IncludeDir.glad}",
+            "%{IncludeDir.glfw}",
+            "%{IncludeDir.glm}",
+            "%{IncludeDir.imgui}",
+            "%{IncludeDir.spdlog}",
+            "%{IncludeDir.stb}"
         }
 
     filter "configurations:Debug"
-        defines "QK_DEBUG"
         runtime "Debug"
         symbols "on"
 
     filter "configurations:Release"
-        defines "QK_RELEASE"
         runtime "Release"
         optimize "on"

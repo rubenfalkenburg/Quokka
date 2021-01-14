@@ -101,10 +101,11 @@ DerivedData/
 
 ### Xcode Patch ###
 *.xcodeproj/*
-!*.xcodeproj/project.pbxproj
-!*.xcodeproj/xcshareddata/
-!*.xcworkspace/contents.xcworkspacedata
+*.xcodeproj/project.pbxproj
+*.xcodeproj/xcshareddata/
+**.xcworkspace/contents.xcworkspacedata
 **/xcshareddata/WorkspaceSettings.xcsettings
+**.xcworkspace/
 
 ### VisualStudio ###
 ## Ignore Visual Studio temporary files, build results, and
@@ -458,3 +459,5 @@ MigrationBackup/
 .ionide/
 
 # End of https://www.toptal.com/developers/gitignore/api/c++,xcode,visualstudio,macos
+
+**.pbxproj

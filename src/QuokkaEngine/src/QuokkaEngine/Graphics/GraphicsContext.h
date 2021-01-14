@@ -8,10 +8,12 @@ namespace QuokkaEngine {
     {
     public:
         GraphicsContext() = default;
+        GraphicsContext(void* nativeWindow);
         virtual ~GraphicsContext() = default;
         
-        virtual void Update() = 0;
-        
-        static std::unique_ptr<GraphicsContext> Create();
+        virtual void SwapBuffers(void* nativeWindow) = 0;
+    public:
+        static std::unique_ptr<GraphicsContext> Create(void* nativeWindow);
     };
+
 }

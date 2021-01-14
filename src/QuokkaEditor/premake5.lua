@@ -7,12 +7,6 @@ project "QuokkaEditor"
     targetdir("%{wks.location}/bin/" .. outputdir .. "/%{prj.name}")
     objdir("%{wks.location}/obj/" .. outputdir .. "/%{prj.name}")
 
-    defines
-    {
-        "GLFW_INCLUDE_NONE",
-        "_CRT_SECURE_NO_WARNINGS"
-    }
-
     files
     {
         "src/**.h",
@@ -21,8 +15,7 @@ project "QuokkaEditor"
 
     includedirs
     {
-        "%{wks.location}/QuokkaEngine/src",
-        "%{wks.location}/QuokkaEngine/vendor",
+        "%{wks.location}/QuokkaEngine/src"
     }
 
     links
@@ -34,31 +27,30 @@ project "QuokkaEditor"
         systemversion "latest"
 
     filter "system:macosx"
-        
+
         sysincludedirs
         {
             "%{wks.location}/QuokkaEngine/src",
-            "%{wks.location}/QuokkaEngine/vendor",
-            "%{IncludeDir.spdlog}",
-            "%{IncludeDir.glfw}",
+            "%{IncludeDir.entt}",
             "%{IncludeDir.glad}",
+            "%{IncludeDir.glfw}",
+            "%{IncludeDir.glm}",
             "%{IncludeDir.imgui}",
-            "%{IncludeDir.glm}"
+            "%{IncludeDir.spdlog}",
+            "%{IncludeDir.stb}"
         }
 
         links
         {
             "Cocoa.framework",
             "IOKit.framework",
-            "OpenGL.framework",
+            "OpenGL.framework"
         }
 
     filter "configurations:Debug"
-        defines "QK_DEBUG"
         runtime "Debug"
         symbols "on"
 
     filter "configurations:Release"
-        defines "QK_RELEASE"
         runtime "Release"
         optimize "on"

@@ -1,11 +1,11 @@
 #include <QuokkaEngine.h>
 
-namespace QuokkaEditor
-{
-    class EditorApplication : public QuokkaEngine::Application
+namespace QuokkaEngine {
+    
+    class EditorApplication : public Application
     {
     public:
-        EditorApplication() : QuokkaEngine::Application("QuokkaEngine Editor")
+        EditorApplication() : Application("Quokka Editor")
         {
             
         }
@@ -15,10 +15,9 @@ namespace QuokkaEditor
             
         }
     };
-    
-}
 
-QuokkaEngine::Application* QuokkaEngine::CreateApplication()
-{
-    return new QuokkaEditor::EditorApplication();
+    Application* CreateApplication()
+    {
+        return new EditorApplication();
+    }
 }

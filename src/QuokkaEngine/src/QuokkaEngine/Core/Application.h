@@ -3,35 +3,29 @@
 #include "qkpch.h"
 
 #include "QuokkaEngine/Graphics/Window.h"
-#include "QuokkaEngine/Graphics/GraphicsContext.h"
 
 int main();
 
-namespace QuokkaEngine
-{
+namespace QuokkaEngine {
+    
     class Application
     {
     public:
         Application(std::string applicationName);
         virtual ~Application();
         
-        virtual void Close();
-        
-        static Application& GetInstance();
+        void Close();
+    public:
+        static Application& Instance() { return *s_instance; };
     private:
-        void StartUp();
         void Run();
-        void ShutDown();
     private:
         bool m_isRunning = true;
-        
         std::unique_ptr<Window> m_window;
-        std::unique_ptr<GraphicsContext> m_graphicsContext;
-        
-        static Application* s_instance;
     private:
         friend int ::main();
+        static Application* s_instance;
     };
-
+    
     Application* CreateApplication();
 }
